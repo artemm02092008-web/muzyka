@@ -1,4 +1,4 @@
-const API_BASE = "/api";
+const API_BASE = "https://music-api.artemitrb1.workers.dev/api";
 let waveTracks = [];
 let currentIndex = 0;
 let isPlaying = false;
