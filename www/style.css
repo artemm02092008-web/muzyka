@@ -1,0 +1,464 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: calc(100vh - 70px);
+}
+
+/* Сайдбар */
+.sidebar {
+    background: #000;
+    padding: 20px 12px;
+    overflow-y: auto;
+    border-right: 1px solid #1a1a1a;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    padding-left: 8px;
+}
+.logo-icon { color: #ffea00; font-size: 26px; }
+
+/* Блок пользователя */
+.user-block { padding: 0 4px 16px; }
+.login-btn {
+    width: 100%; padding: 10px; background: #ffea00; color: #000;
+    border: none; border-radius: 8px; font-weight: 600; cursor: pointer;
+    font-size: 13px;
+}
+.login-btn:hover { background: #e6d200; }
+.user-email {
+    color: #ffea00; font-size: 12px; display: block;
+    margin-bottom: 8px; padding-left: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.logout-btn {
+    width: 100%; padding: 8px; background: #1a1a1a; color: #fff;
+    border: 1px solid #333; border-radius: 8px; cursor: pointer; font-size: 12px;
+}
+.logout-btn:hover { background: #252525; }
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #aaa;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.nav-item:hover { background: #1a1a1a; color: #fff; }
+.nav-item.active { color: #ffea00; font-weight: 600; background: #141414; }
+.nav-item .icon { width: 18px; height: 18px; flex-shrink: 0; }
+.nav-label { display: inline; }
+
+/* Основная часть */
+.main {
+    padding: 20px 32px;
+    overflow-y: auto;
+    position: relative;
+}
+.main::-webkit-scrollbar { width: 8px; }
+.main::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+h1 { font-size: 28px; margin-bottom: 8px; }
+.subtitle { color: #888; margin-bottom: 24px; font-size: 14px; }
+
+.back-btn {
+    background: #1a1a1a; color: #fff; border: none;
+    padding: 8px 16px; border-radius: 20px;
+    font-size: 13px; cursor: pointer; margin-bottom: 20px;
+}
+.back-btn:hover { background: #252525; }
+
+/* Моя волна */
+#page-home.active {
+    display: flex; align-items: center; justify-content: center; min-height: 100%;
+}
+.wave-block {
+    position: relative; text-align: center; padding: 40px;
+    width: 100%; max-width: 900px; min-height: 560px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.wave-bg {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(255, 235, 59, 0.75) 0%, rgba(255, 193, 7, 0.5) 20%, rgba(233, 30, 99, 0.35) 45%, rgba(0, 0, 0, 0) 70%),
+        radial-gradient(circle at 30% 30%, rgba(156, 39, 176, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(255, 152, 0, 0.4) 0%, transparent 40%);
+    filter: blur(50px); z-index: 0; border-radius: 50%; transform: scale(0.85);
+}
+.wave-title {
+    position: relative; z-index: 1;
+    font-size: 80px; font-weight: 900; letter-spacing: -2px;
+    margin-bottom: 40px; text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+}
+.wave-cover {
+    position: relative; z-index: 1;
+    margin-bottom: 32px; width: 140px; height: 140px;
+}
+.wave-cover img {
+    width: 140px; height: 140px; border-radius: 10px; object-fit: cover;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+.wave-cover-placeholder {
+    width: 140px; height: 140px; border-radius: 10px;
+    overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+}
+.wave-cover-placeholder img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.wave-controls {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(20px);
+    padding: 8px 14px; border-radius: 40px;
+    margin-bottom: 24px; width: 100%; max-width: 560px;
+}
+.circle-btn {
+    background: rgba(255,255,255,0.1); border: none; color: #fff;
+    width: 38px; height: 38px; border-radius: 50%;
+    cursor: pointer; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.15s;
+}
+.circle-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+.circle-btn.active { background: #ffea00; color: #000; }
+.wave-info {
+    flex: 1; font-size: 14px; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    text-align: center; padding: 0 6px;
+}
+.wave-nav {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 28px; margin-bottom: 24px;
+}
+.nav-arrow {
+    background: none; border: none; color: #fff;
+    cursor: pointer; opacity: 0.7;
+    transition: opacity 0.15s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; padding: 8px;
+}
+.nav-arrow:hover { opacity: 1; transform: scale(1.1); }
+.play-btn-big {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: #ffea00; color: #000; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s; flex-shrink: 0;
+}
+.play-btn-big:hover { transform: scale(1.05); }
+.ai-note {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: #aaa;
+    max-width: 460px; text-align: left; margin-top: 20px;
+}
+.ai-icon {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 10px; border-radius: 12px;
+    font-weight: 600; color: #ffea00; flex-shrink: 0;
+}
+
+/* Поиск */
+.search-bar { display: flex; gap: 8px; margin-bottom: 24px; max-width: 600px; }
+.search-bar input {
+    flex: 1; padding: 12px 16px;
+    border-radius: 24px; border: 1px solid #222;
+    background: #111; color: #fff;
+    outline: none; font-size: 14px; min-width: 0;
+}
+.search-bar input:focus { border-color: #ffea00; }
+.search-bar button {
+    padding: 12px 24px; background: #ffea00; color: #000;
+    border: none; border-radius: 24px; cursor: pointer;
+    font-size: 14px; font-weight: 600; flex-shrink: 0;
+}
+.search-bar button:hover { background: #e6d200; }
+
+/* Карточки */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: #0e0e0e; border-radius: 12px; padding: 14px;
+    cursor: pointer; transition: background 0.15s, transform 0.15s;
+}
+.card:hover { background: #1a1a1a; transform: translateY(-3px); }
+.card-img {
+    width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover;
+    background: linear-gradient(135deg, #333, #555);
+    margin-bottom: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+}
+.card-round .card-img { border-radius: 50%; }
+.card-title {
+    font-size: 14px; font-weight: 600; margin-bottom: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-desc {
+    font-size: 12px; color: #888;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Список треков */
+.track-list { display: flex; flex-direction: column; gap: 4px; }
+.track-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 14px; border-radius: 8px;
+    cursor: pointer; transition: background 0.15s;
+}
+.track-row:hover { background: #141414; }
+.track-row.active { background: #1f1f1f; }
+.track-num { width: 24px; color: #666; font-size: 13px; text-align: center; flex-shrink: 0; }
+.track-cover {
+    width: 44px; height: 44px; border-radius: 6px;
+    object-fit: cover; background: #222; flex-shrink: 0;
+}
+.track-info { flex: 1; min-width: 0; }
+.track-title {
+    font-size: 14px; font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.track-artist {
+    font-size: 12px; color: #888; margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.track-duration { font-size: 13px; color: #666; flex-shrink: 0; }
+
+.empty { color: #666; padding: 20px 0; }
+
+/* Страница артиста */
+.artist-header {
+    display: flex; align-items: center; gap: 24px;
+    margin-bottom: 32px; padding: 20px;
+    background: #0e0e0e; border-radius: 16px;
+}
+.artist-header img {
+    width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7); flex-shrink: 0;
+}
+.artist-header .placeholder {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: linear-gradient(135deg, #333, #555);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px; box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    flex-shrink: 0;
+}
+.artist-header-info h1 { font-size: 36px; margin-bottom: 8px; }
+.artist-header-info .genres { color: #888; font-size: 14px; }
+
+/* Мини-плеер */
+.mini-player {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 70px; background: #0a0a0a;
+    border-top: 1px solid #1a1a1a;
+    display: flex; align-items: center;
+    padding: 0 24px; gap: 20px; z-index: 100;
+}
+.mini-info { display: flex; align-items: center; gap: 10px; width: 240px; }
+.mini-info img { width: 44px; height: 44px; border-radius: 6px; object-fit: cover; }
+.mini-title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px; }
+.mini-artist { font-size: 11px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 170px; }
+
+.mini-controls { display: flex; gap: 12px; }
+.mini-controls button {
+    background: none; border: none; color: #fff;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    padding: 4px;
+}
+.mini-controls button:hover { color: #ffea00; }
+
+.mini-progress {
+    flex: 1; display: flex; align-items: center; gap: 12px;
+    font-size: 12px; color: #888;
+}
+.mini-progress input { flex: 1; accent-color: #ffea00; }
+
+/* Модалка авторизации */
+.auth-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 300; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+}
+.auth-box {
+    background: #111; padding: 32px; border-radius: 16px;
+    width: 100%; max-width: 380px;
+}
+.auth-box h2 { margin-bottom: 20px; font-size: 22px; }
+.auth-input {
+    width: 100%; padding: 12px; margin-bottom: 12px;
+    background: #0a0a0a; border: 1px solid #222; color: #fff;
+    border-radius: 8px; outline: none; font-size: 15px;
+}
+.auth-input:focus { border-color: #ffea00; }
+.auth-submit {
+    width: 100%; padding: 12px; background: #ffea00; color: #000;
+    border: none; border-radius: 8px; font-weight: 600; cursor: pointer;
+    font-size: 15px;
+}
+.auth-submit:hover { background: #e6d200; }
+.auth-switch { margin-top: 16px; font-size: 13px; color: #888; text-align: center; }
+.auth-switch a { color: #ffea00; text-decoration: none; margin-left: 4px; }
+.auth-error { color: #ff4444; font-size: 13px; margin-top: 10px; text-align: center; min-height: 18px; }
+
+/* ======================================== */
+/* АДАПТИВ ПОД ТЕЛЕФОН                       */
+/* ======================================== */
+@media (max-width: 700px) {
+    .layout {
+        grid-template-columns: 1fr;
+        height: calc(100vh - 130px);
+    }
+
+    .sidebar {
+        position: fixed;
+        bottom: 70px;
+        left: 0; right: 0;
+        height: 60px;
+        background: #0a0a0a;
+        border-right: none;
+        border-top: 1px solid #1a1a1a;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 90;
+        overflow: hidden;
+    }
+    .logo { display: none; }
+    .user-block {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 0;
+        z-index: 95;
+    }
+    .login-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        width: auto;
+    }
+    .user-email {
+        background: rgba(0,0,0,0.7);
+        padding: 4px 10px;
+        border-radius: 12px;
+        margin-bottom: 4px;
+    }
+    .logout-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        width: auto;
+    }
+    .sidebar nav {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        height: 100%;
+    }
+    .nav-item {
+        flex: 1;
+        flex-direction: column;
+        gap: 2px;
+        padding: 6px 2px;
+        margin: 0;
+        border-radius: 0;
+        justify-content: center;
+        font-size: 10px;
+    }
+    .nav-item:hover { background: transparent; }
+    .nav-item.active { background: transparent; color: #ffea00; }
+    .nav-item .icon { width: 20px; height: 20px; }
+    .nav-label { font-size: 10px; }
+
+    .main {
+        padding: 16px 14px 16px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    #page-home.active {
+        min-height: auto;
+        align-items: flex-start;
+        padding-top: 0;
+    }
+    .wave-block { padding: 20px 8px; min-height: auto; }
+    .wave-title { font-size: 44px; letter-spacing: -1px; margin-bottom: 24px; }
+    .wave-cover, .wave-cover img, .wave-cover-placeholder {
+        width: 120px; height: 120px; margin-bottom: 20px;
+    }
+    .wave-controls { padding: 6px 10px; gap: 6px; margin-bottom: 18px; }
+    .circle-btn { width: 34px; height: 34px; }
+    .wave-info { font-size: 12px; }
+    .wave-nav { gap: 18px; margin-bottom: 16px; }
+    .play-btn-big { width: 60px; height: 60px; }
+    .play-btn-big svg { width: 24px; height: 24px; }
+    .nav-arrow svg { width: 24px; height: 24px; }
+    .ai-note { font-size: 11px; max-width: 100%; text-align: center; justify-content: center; }
+
+    h1 { font-size: 22px; margin-bottom: 6px; }
+    .search-bar { flex-direction: column; max-width: 100%; gap: 6px; margin-bottom: 16px; }
+    .search-bar input { width: 100%; padding: 12px 16px; font-size: 15px; }
+    .search-bar button { width: 100%; padding: 12px; }
+
+    .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { padding: 10px; border-radius: 10px; }
+    .card-img { font-size: 30px; margin-bottom: 8px; }
+    .card-title { font-size: 13px; }
+    .card-desc { font-size: 11px; }
+
+    .track-row { padding: 8px 6px; gap: 10px; }
+    .track-cover { width: 40px; height: 40px; }
+    .track-title { font-size: 13px; }
+    .track-artist { font-size: 11px; }
+    .track-duration { font-size: 11px; }
+    .track-num { width: 18px; font-size: 11px; }
+
+    .artist-header { flex-direction: column; text-align: center; gap: 14px; padding: 16px; margin-bottom: 20px; }
+    .artist-header img, .artist-header .placeholder { width: 120px; height: 120px; font-size: 44px; }
+    .artist-header-info h1 { font-size: 24px; }
+    .artist-header-info .genres { font-size: 12px; }
+
+    .mini-player { height: 70px; padding: 0 12px; gap: 10px; }
+    .mini-info { width: auto; flex: 1; min-width: 0; gap: 8px; }
+    .mini-info img { width: 40px; height: 40px; }
+    .mini-title { font-size: 12px; max-width: 100%; }
+    .mini-artist { font-size: 10px; max-width: 100%; }
+    .mini-controls { gap: 4px; flex-shrink: 0; }
+    .mini-controls button svg { width: 20px; height: 20px; }
+    .mini-progress { display: none; }
+}
+
+@media (max-width: 400px) {
+    .wave-title { font-size: 36px; }
+    .wave-cover, .wave-cover img, .wave-cover-placeholder { width: 100px; height: 100px; }
+    .play-btn-big { width: 54px; height: 54px; }
+    .nav-label { font-size: 9px; }
+    .nav-item .icon { width: 18px; height: 18px; }
+}

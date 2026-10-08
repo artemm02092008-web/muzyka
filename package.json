@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@capacitor/android": "^8.5.3",
     "axios": "^1.20.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
@@ -14,14 +15,17 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.11.0",
     "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-native": "0.86.3",
+    "react-native-web": "^0.21.2",
     "vk-music-api-wrapper": "^1.0.5"
   },
   "scripts": {
+    "dev": "expo start --web",
     "start": "expo start",
+    "web": "expo start --web",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "ios": "expo start --ios"
   },
   "private": true,
   "description": "",
