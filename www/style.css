@@ -4,9 +4,23 @@
   padding: 0;
 }
 
+:root {
+  --bg: #050a07;
+  --bg-2: #0d1a12;
+  --bg-3: #14261a;
+  --border: #1f3a2a;
+  --text: #ffffff;
+  --text-dim: #88a894;
+  --text-mute: #4a6a55;
+  --accent: #00ff88;
+  --accent-2: #00d9a0;
+  --accent-hi: #7dffb0;
+  --danger: #ff5577;
+}
+
 body {
-  background: #000;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   height: 100vh;
   overflow: hidden;
@@ -19,12 +33,12 @@ body {
   height: calc(100vh - 70px);
 }
 
-/* Сайдбар */
+/* ============ САЙДБАР ============ */
 .sidebar {
-  background: #000;
+  background: var(--bg);
   padding: 20px 12px;
   overflow-y: auto;
-  border-right: 1px solid #1a1a1a;
+  border-right: 1px solid var(--border);
 }
 .logo {
   display: flex;
@@ -36,30 +50,35 @@ body {
   padding-left: 8px;
 }
 .logo-icon {
-  color: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: 26px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
 }
 
-/* Блок пользователя */
 .user-block {
   padding: 0 4px 16px;
 }
 .login-btn {
   width: 100%;
   padding: 10px;
-  background: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   font-size: 13px;
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
 }
 .login-btn:hover {
-  background: #e6d200;
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
 }
 .user-email {
-  color: #ffea00;
+  color: var(--accent);
   font-size: 12px;
   display: block;
   margin-bottom: 8px;
@@ -71,22 +90,22 @@ body {
 .logout-btn {
   width: 100%;
   padding: 8px;
-  background: #1a1a1a;
-  color: #fff;
-  border: 1px solid #333;
+  background: var(--bg-3);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 8px;
   cursor: pointer;
   font-size: 12px;
 }
 .logout-btn:hover {
-  background: #252525;
+  background: #1c3220;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: #aaa;
+  color: var(--text-dim);
   text-decoration: none;
   padding: 10px 14px;
   border-radius: 8px;
@@ -96,13 +115,19 @@ body {
   transition: background 0.15s, color 0.15s;
 }
 .nav-item:hover {
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--bg-3);
+  color: var(--text);
 }
 .nav-item.active {
-  color: #ffea00;
+  color: var(--accent);
   font-weight: 600;
-  background: #141414;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 136, 0.15),
+    rgba(0, 217, 160, 0.05)
+  );
+  border-left: 3px solid var(--accent);
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
 }
 .nav-item .icon {
   width: 18px;
@@ -113,7 +138,7 @@ body {
   display: inline;
 }
 
-/* Основная часть */
+/* ============ MAIN ============ */
 .main {
   padding: 20px 32px;
   overflow-y: auto;
@@ -123,7 +148,7 @@ body {
   width: 8px;
 }
 .main::-webkit-scrollbar-thumb {
-  background: #222;
+  background: var(--border);
   border-radius: 4px;
 }
 
@@ -139,14 +164,14 @@ h1 {
   margin-bottom: 8px;
 }
 .subtitle {
-  color: #888;
+  color: var(--text-dim);
   margin-bottom: 24px;
   font-size: 14px;
 }
 
 .back-btn {
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--bg-3);
+  color: var(--text);
   border: none;
   padding: 8px 16px;
   border-radius: 20px;
@@ -155,10 +180,12 @@ h1 {
   margin-bottom: 20px;
 }
 .back-btn:hover {
-  background: #252525;
+  background: #1c3220;
 }
 
-/* Моя волна */
+/* ======================================== */
+/* МОЯ ВОЛНА — АНИМИРОВАННАЯ СЕРЕДИНА         */
+/* ======================================== */
 #page-home.active {
   display: flex;
   align-items: center;
@@ -177,31 +204,54 @@ h1 {
   align-items: center;
   justify-content: center;
 }
+
+/* Круглый анимированный источник света */
 .wave-bg {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-      circle at 50% 45%,
-      rgba(255, 235, 59, 0.75) 0%,
-      rgba(255, 193, 7, 0.5) 20%,
-      rgba(233, 30, 99, 0.35) 45%,
-      rgba(0, 0, 0, 0) 70%
-    ),
-    radial-gradient(
-      circle at 30% 30%,
-      rgba(156, 39, 176, 0.4) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 70% 70%,
-      rgba(255, 152, 0, 0.4) 0%,
-      transparent 40%
-    );
-  filter: blur(50px);
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  margin-left: -350px;
+  margin-top: -350px;
   z-index: 0;
   border-radius: 50%;
-  transform: scale(0.85);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 136, 0.75) 0%,
+    rgba(0, 217, 160, 0.45) 30%,
+    rgba(0, 140, 90, 0.2) 55%,
+    rgba(0, 0, 0, 0) 75%
+  );
+  filter: blur(90px);
+  animation: wavePulse 6s ease-in-out infinite;
+  pointer-events: none;
 }
+
+@keyframes wavePulse {
+  0%,
+  100% {
+    transform: scale(0.95) translate(0, 0);
+    opacity: 0.85;
+    filter: blur(90px) hue-rotate(0deg);
+  }
+  33% {
+    transform: scale(1.08) translate(-15px, 10px);
+    opacity: 1;
+    filter: blur(95px) hue-rotate(10deg);
+  }
+  66% {
+    transform: scale(1.05) translate(15px, -10px);
+    opacity: 0.95;
+    filter: blur(88px) hue-rotate(-8deg);
+  }
+  100% {
+    transform: scale(0.95) translate(0, 0);
+    opacity: 0.85;
+    filter: blur(90px) hue-rotate(0deg);
+  }
+}
+
 .wave-title {
   position: relative;
   z-index: 1;
@@ -209,8 +259,26 @@ h1 {
   font-weight: 900;
   letter-spacing: -2px;
   margin-bottom: 40px;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(135deg, #ffffff 0%, #00ff88 50%, #7dffb0 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: titleShimmer 5s ease-in-out infinite;
 }
+
+@keyframes titleShimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.4));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.8));
+  }
+}
+
 .wave-cover {
   position: relative;
   z-index: 1;
@@ -223,14 +291,16 @@ h1 {
   height: 140px;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.6),
+    0 0 60px rgba(0, 255, 136, 0.3);
 }
 .wave-cover-placeholder {
   width: 140px;
   height: 140px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.6),
+    0 0 60px rgba(0, 255, 136, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,16 +317,19 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(20, 20, 20, 0.85);
+  background: rgba(13, 26, 18, 0.7);
   backdrop-filter: blur(20px);
   padding: 8px 14px;
   border-radius: 40px;
   margin-bottom: 24px;
   width: 100%;
   max-width: 560px;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(0, 255, 136, 0.05);
 }
 .circle-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 255, 136, 0.12);
   border: none;
   color: #fff;
   width: 38px;
@@ -271,12 +344,14 @@ h1 {
   transition: background 0.15s, transform 0.15s;
 }
 .circle-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 255, 136, 0.3);
   transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
 }
 .circle-btn.active {
-  background: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
 }
 .wave-info {
   flex: 1;
@@ -311,23 +386,39 @@ h1 {
 .nav-arrow:hover {
   opacity: 1;
   transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(0, 255, 136, 0.8));
 }
 .play-btn-big {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
   flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.3);
+  animation: playPulse 3s ease-in-out infinite;
+}
+@keyframes playPulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.5),
+      0 0 40px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.9),
+      0 0 60px rgba(0, 255, 136, 0.5);
+  }
 }
 .play-btn-big:hover {
   transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(0, 255, 136, 0.7),
+    0 0 60px rgba(0, 255, 136, 0.5);
 }
 .ai-note {
   position: relative;
@@ -336,21 +427,22 @@ h1 {
   align-items: center;
   gap: 10px;
   font-size: 12px;
-  color: #aaa;
+  color: var(--text-dim);
   max-width: 460px;
   text-align: left;
   margin-top: 20px;
 }
 .ai-icon {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   padding: 4px 10px;
   border-radius: 12px;
-  font-weight: 600;
-  color: #ffea00;
+  font-weight: 700;
+  color: #000;
   flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.5);
 }
 
-/* Поиск */
+/* ============ SEARCH BAR ============ */
 .search-bar {
   display: flex;
   gap: 8px;
@@ -361,54 +453,60 @@ h1 {
   flex: 1;
   padding: 12px 16px;
   border-radius: 24px;
-  border: 1px solid #222;
-  background: #111;
-  color: #fff;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text);
   outline: none;
   font-size: 14px;
   min-width: 0;
 }
 .search-bar input:focus {
-  border-color: #ffea00;
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.3);
 }
 .search-bar button {
   padding: 12px 24px;
-  background: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
   border: none;
   border-radius: 24px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
 }
 .search-bar button:hover {
-  background: #e6d200;
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
 }
 
-/* Карточки */
+/* ============ КАРТОЧКИ ============ */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
 }
 .card {
-  background: #0e0e0e;
+  background: var(--bg-2);
   border-radius: 12px;
   padding: 14px;
   cursor: pointer;
-  transition: background 0.15s, transform 0.15s;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  border: 1px solid transparent;
 }
 .card:hover {
-  background: #1a1a1a;
+  background: var(--bg-3);
+  border-color: var(--accent);
   transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
 }
 .card-img {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 8px;
   object-fit: cover;
-  background: linear-gradient(135deg, #333, #555);
+  background: linear-gradient(135deg, var(--bg-3), #1c3220);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -428,13 +526,13 @@ h1 {
 }
 .card-desc {
   font-size: 12px;
-  color: #888;
+  color: var(--text-dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Список треков */
+/* ============ СПИСОК ТРЕКОВ ============ */
 .track-list {
   display: flex;
   flex-direction: column;
@@ -450,14 +548,15 @@ h1 {
   transition: background 0.15s;
 }
 .track-row:hover {
-  background: #141414;
+  background: var(--bg-3);
 }
 .track-row.active {
-  background: #1f1f1f;
+  background: linear-gradient(90deg, rgba(0, 255, 136, 0.15), transparent);
+  border-left: 2px solid var(--accent);
 }
 .track-num {
   width: 24px;
-  color: #666;
+  color: var(--text-mute);
   font-size: 13px;
   text-align: center;
   flex-shrink: 0;
@@ -467,7 +566,7 @@ h1 {
   height: 44px;
   border-radius: 6px;
   object-fit: cover;
-  background: #222;
+  background: var(--bg-3);
   flex-shrink: 0;
 }
 .track-info {
@@ -483,7 +582,7 @@ h1 {
 }
 .track-artist {
   font-size: 12px;
-  color: #888;
+  color: var(--text-dim);
   margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -491,43 +590,44 @@ h1 {
 }
 .track-duration {
   font-size: 13px;
-  color: #666;
+  color: var(--text-mute);
   flex-shrink: 0;
 }
 
 .empty {
-  color: #666;
+  color: var(--text-mute);
   padding: 20px 0;
 }
 
-/* Страница артиста */
+/* ============ СТРАНИЦА АРТИСТА ============ */
 .artist-header {
   display: flex;
   align-items: center;
   gap: 24px;
   margin-bottom: 32px;
   padding: 20px;
-  background: #0e0e0e;
+  background: var(--bg-2);
   border-radius: 16px;
+  border: 1px solid var(--border);
 }
 .artist-header img {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
   flex-shrink: 0;
 }
 .artist-header .placeholder {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #333, #555);
+  background: linear-gradient(135deg, var(--bg-3), #1c3220);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 60px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
   flex-shrink: 0;
 }
 .artist-header-info h1 {
@@ -535,24 +635,25 @@ h1 {
   margin-bottom: 8px;
 }
 .artist-header-info .genres {
-  color: #888;
+  color: var(--text-dim);
   font-size: 14px;
 }
 
-/* Мини-плеер */
+/* ============ МИНИ-ПЛЕЕР ============ */
 .mini-player {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   height: 70px;
-  background: #0a0a0a;
-  border-top: 1px solid #1a1a1a;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   padding: 0 24px;
   gap: 20px;
   z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 }
 .mini-info {
   display: flex;
@@ -576,7 +677,7 @@ h1 {
 }
 .mini-artist {
   font-size: 11px;
-  color: #888;
+  color: var(--text-dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -596,9 +697,11 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 4px;
+  transition: color 0.15s, filter 0.15s;
 }
 .mini-controls button:hover {
-  color: #ffea00;
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
 }
 
 .mini-progress {
@@ -607,30 +710,33 @@ h1 {
   align-items: center;
   gap: 12px;
   font-size: 12px;
-  color: #888;
+  color: var(--text-dim);
 }
 .mini-progress input {
   flex: 1;
-  accent-color: #ffea00;
+  accent-color: var(--accent);
 }
 
-/* Модалка авторизации */
+/* ============ МОДАЛКА АВТОРИЗАЦИИ ============ */
 .auth-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 300;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  backdrop-filter: blur(8px);
 }
 .auth-box {
-  background: #111;
+  background: var(--bg-2);
   padding: 32px;
   border-radius: 16px;
   width: 100%;
   max-width: 380px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 40px rgba(0, 255, 136, 0.15);
 }
 .auth-box h2 {
   margin-bottom: 20px;
@@ -640,47 +746,138 @@ h1 {
   width: 100%;
   padding: 12px;
   margin-bottom: 12px;
-  background: #0a0a0a;
-  border: 1px solid #222;
-  color: #fff;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
   border-radius: 8px;
   outline: none;
   font-size: 15px;
 }
 .auth-input:focus {
-  border-color: #ffea00;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
 }
 .auth-submit {
   width: 100%;
   padding: 12px;
-  background: #ffea00;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #000;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   font-size: 15px;
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
 }
 .auth-submit:hover {
-  background: #e6d200;
+  filter: brightness(1.1);
+  box-shadow: 0 6px 24px rgba(0, 255, 136, 0.5);
 }
 .auth-switch {
   margin-top: 16px;
   font-size: 13px;
-  color: #888;
+  color: var(--text-dim);
   text-align: center;
 }
 .auth-switch a {
-  color: #ffea00;
+  color: var(--accent);
   text-decoration: none;
   margin-left: 4px;
 }
 .auth-error {
-  color: #ff4444;
+  color: var(--danger);
   font-size: 13px;
   margin-top: 10px;
   text-align: center;
   min-height: 18px;
+}
+
+/* ============ МОИ ПЕСНИ ============ */
+.local-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.local-header .subtitle {
+  margin-bottom: 0;
+}
+
+.add-songs-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+}
+.add-songs-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+}
+.add-songs-btn:active {
+  transform: scale(0.97);
+}
+
+.local-count {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin-bottom: 16px;
+  padding-left: 2px;
+}
+
+#page-local .track-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 22px;
+  background: var(--bg-3);
+}
+
+#page-local .delete-btn {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 18px;
+  padding: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+#page-local .delete-btn:hover {
+  opacity: 1;
+}
+
+#page-local .track-row.playing {
+  background: linear-gradient(90deg, rgba(0, 255, 136, 0.18), transparent);
+  border-left: 2px solid var(--accent);
+}
+#page-local .track-row.playing .track-title {
+  color: var(--accent);
+}
+
+.upload-progress {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 26, 18, 0.95);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.4);
 }
 
 /* ======================================== */
@@ -698,15 +895,16 @@ h1 {
     left: 0;
     right: 0;
     height: 60px;
-    background: #0a0a0a;
+    background: var(--bg-2);
     border-right: none;
-    border-top: 1px solid #1a1a1a;
+    border-top: 1px solid var(--border);
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 90;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
   .logo {
     display: none;
@@ -734,17 +932,20 @@ h1 {
     font-size: 11px;
     width: auto;
   }
+
   .sidebar nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
+    overflow-x: auto;
   }
   .nav-item {
-    flex: 1;
+    flex: 0 0 auto;
+    min-width: 58px;
     flex-direction: column;
     gap: 2px;
-    padding: 6px 2px;
+    padding: 6px 4px;
     margin: 0;
     border-radius: 0;
     justify-content: center;
@@ -755,14 +956,17 @@ h1 {
   }
   .nav-item.active {
     background: transparent;
-    color: #ffea00;
+    color: var(--accent);
+    border-left: none;
+    border-top: 2px solid var(--accent);
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
   }
   .nav-item .icon {
     width: 20px;
     height: 20px;
   }
   .nav-label {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .main {
@@ -784,6 +988,13 @@ h1 {
     font-size: 44px;
     letter-spacing: -1px;
     margin-bottom: 24px;
+  }
+  .wave-bg {
+    width: 400px;
+    height: 400px;
+    margin-left: -200px;
+    margin-top: -200px;
+    filter: blur(70px);
   }
   .wave-cover,
   .wave-cover img,
@@ -942,6 +1153,17 @@ h1 {
   .mini-progress {
     display: none;
   }
+
+  .local-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .add-songs-btn {
+    width: 100%;
+    padding: 12px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -959,108 +1181,147 @@ h1 {
     height: 54px;
   }
   .nav-label {
-    font-size: 9px;
+    font-size: 8px;
   }
   .nav-item .icon {
     width: 18px;
     height: 18px;
   }
 }
-/* ======================================== */
-/* ЛОКАЛЬНЫЙ ПЛЕЕР — "Мои песни"             */
-/* ======================================== */
-
-.local-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.add-songs-btn {
-  background: #ffea00;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 22px;
-  font-size: 14px;
-  font-weight: 600;
+/* ============================================================
+   АЛЬБОМЫ (НОВИНКИ)
+   ============================================================ */
+.album-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 14px;
   cursor: pointer;
-  white-space: nowrap;
+  transition: all 0.25s;
+  position: relative;
 }
 
-.add-songs-btn:hover {
-  background: #e6d200;
-}
-.add-songs-btn:active {
-  transform: scale(0.97);
-}
-
-.local-count {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 16px;
-  padding-left: 2px;
+.album-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-#page-local .track-cover {
+.album-cover-wrap {
+  position: relative;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.album-card .card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffea00;
-  font-size: 22px;
-  background: #1a1a1a;
+  transition: transform 0.3s;
 }
 
-#page-local .delete-btn {
-  background: none;
-  border: none;
-  color: #ff4444;
-  font-size: 18px;
-  padding: 8px;
-  cursor: pointer;
-  opacity: 0.7;
-  flex-shrink: 0;
+.album-card:hover .card-img {
+  transform: scale(1.05);
 }
 
-#page-local .delete-btn:hover {
+.album-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.album-card:hover .album-play-overlay {
   opacity: 1;
 }
 
-#page-local .track-row.playing {
-  background: #141414;
+.album-play-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0050, #ff4081);
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(255, 0, 80, 0.5);
+  transform: translateY(8px);
+  transition: transform 0.25s;
+  padding-left: 4px;
 }
 
-#page-local .track-row.playing .track-title {
-  color: #ffea00;
+.album-card:hover .album-play-btn {
+  transform: translateY(0);
 }
 
-.upload-progress {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(20, 20, 20, 0.95);
-  border: 1px solid #333;
-  color: #ffea00;
-  padding: 12px 24px;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 600;
-  z-index: 9999;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+/* ============================================================
+   СКЕЛЕТОН ЗАГРУЗКИ
+   ============================================================ */
+.skeleton {
+  pointer-events: none;
 }
 
-@media (max-width: 700px) {
-  .local-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    margin-bottom: 12px;
+.skeleton-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 16px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  width: 80%;
+}
+
+.skeleton-text-short {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  width: 55%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
   }
-  .add-songs-btn {
-    width: 100%;
-    padding: 12px;
+  100% {
+    background-position: -200% 0;
   }
 }

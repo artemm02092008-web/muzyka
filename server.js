@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname));
 
 // ⚠️ Твой токен Яндекс.Музыки
-const YM_TOKEN = process.env.TOKEN;
+const YM_TOKEN = process.env.YM_TOKEN;
 const YM_API = "https://api.music.yandex.net";
 
 const headers = {
